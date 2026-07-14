@@ -48,7 +48,7 @@ export function Hero() {
                 </Link>
               </Button>
               <Button size="lg" variant="outline" className="w-full sm:w-auto text-wrap h-auto py-3" asChild>
-                <Link href="/custom-software-development">
+                <Link href="#solutions">
                   Explore Our Solutions
                 </Link>
               </Button>
