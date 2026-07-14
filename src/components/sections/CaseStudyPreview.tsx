@@ -40,7 +40,7 @@ export function CaseStudyPreview() {
               <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-blue-400" /> Dispatch tracking</li>
             </ul>
             
-            <Link href="/case-studies" className="inline-flex items-center text-blue-400 font-semibold hover:text-blue-300 transition-colors">
+            <Link href="/case-studies/multi-warehouse-inventory" className="inline-flex items-center text-blue-400 font-semibold hover:text-blue-300 transition-colors">
               Read Full Case Study <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </div>

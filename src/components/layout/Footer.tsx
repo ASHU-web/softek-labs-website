@@ -16,20 +16,20 @@ export function Footer() {
           <div>
             <h4 className="font-semibold text-white mb-4">Company</h4>
             <ul className="space-y-3">
-              <li><Link href="/about" className="text-slate-200 hover:text-white transition-colors">About</Link></li>
-              <li><Link href="/our-process" className="text-slate-200 hover:text-white transition-colors">Our Process</Link></li>
-              <li><Link href="/case-studies" className="text-slate-200 hover:text-white transition-colors">Case Studies</Link></li>
-              <li><Link href="/contact" className="text-slate-200 hover:text-white transition-colors">Contact</Link></li>
+              <li><Link href="/#process" className="text-slate-200 hover:text-white transition-colors">About</Link></li>
+              <li><Link href="/#process" className="text-slate-200 hover:text-white transition-colors">Our Process</Link></li>
+              <li><Link href="/#case-studies" className="text-slate-200 hover:text-white transition-colors">Case Studies</Link></li>
+              <li><Link href="/#pricing" className="text-slate-200 hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
           <div>
             <h4 className="font-semibold text-white mb-4">Solutions</h4>
             <ul className="space-y-3">
-              <li><Link href="/solutions/inventory-management" className="text-slate-200 hover:text-white transition-colors">Inventory Management</Link></li>
-              <li><Link href="/solutions/crm" className="text-slate-200 hover:text-white transition-colors">CRM Software</Link></li>
-              <li><Link href="/solutions/warehouse-management" className="text-slate-200 hover:text-white transition-colors">Warehouse Management</Link></li>
-              <li><Link href="/solutions/manufacturing" className="text-slate-200 hover:text-white transition-colors">Manufacturing</Link></li>
-              <li><Link href="/custom-software-development" className="text-slate-200 hover:text-white transition-colors">Custom Software</Link></li>
+              <li><Link href="/#pricing" className="text-slate-200 hover:text-white transition-colors">Inventory Management</Link></li>
+              <li><Link href="/#pricing" className="text-slate-200 hover:text-white transition-colors">CRM Software</Link></li>
+              <li><Link href="/#pricing" className="text-slate-200 hover:text-white transition-colors">Warehouse Management</Link></li>
+              <li><Link href="/#pricing" className="text-slate-200 hover:text-white transition-colors">Manufacturing</Link></li>
+              <li><Link href="/#pricing" className="text-slate-200 hover:text-white transition-colors">Custom Software</Link></li>
             </ul>
           </div>
           <div>

@@ -20,22 +20,22 @@ export function Navbar() {
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex gap-6">
-          <Link href="#solutions" className="text-sm font-medium hover:text-blue-600 transition-colors">
+          <Link href="/#solutions" className="text-sm font-medium hover:text-blue-600 transition-colors">
             Solutions
           </Link>
-          <Link href="#process" className="text-sm font-medium hover:text-blue-600 transition-colors">
+          <Link href="/#process" className="text-sm font-medium hover:text-blue-600 transition-colors">
             Our Process
           </Link>
-          <Link href="#case-studies" className="text-sm font-medium hover:text-blue-600 transition-colors">
+          <Link href="/#case-studies" className="text-sm font-medium hover:text-blue-600 transition-colors">
             Case Studies
           </Link>
-          <Link href="#reviews" className="text-sm font-medium hover:text-blue-600 transition-colors">
+          <Link href="/#reviews" className="text-sm font-medium hover:text-blue-600 transition-colors">
             Reviews
           </Link>
-          <Link href="#pricing" className="text-sm font-medium hover:text-blue-600 transition-colors">
+          <Link href="/#pricing" className="text-sm font-medium hover:text-blue-600 transition-colors">
             Pricing
           </Link>
-          <Link href="#faqs" className="text-sm font-medium hover:text-blue-600 transition-colors">
+          <Link href="/#faqs" className="text-sm font-medium hover:text-blue-600 transition-colors">
             FAQs
           </Link>
         </nav>
@@ -67,22 +67,22 @@ export function Navbar() {
             className="md:hidden border-t border-slate-100 bg-white overflow-hidden"
           >
             <nav className="flex flex-col px-4 py-6 gap-4">
-              <Link href="#solutions" onClick={toggleMenu} className="text-base font-medium text-slate-800 hover:text-blue-600">
+              <Link href="/#solutions" onClick={toggleMenu} className="text-base font-medium text-slate-800 hover:text-blue-600">
                 Solutions
               </Link>
-              <Link href="#process" onClick={toggleMenu} className="text-base font-medium text-slate-800 hover:text-blue-600">
+              <Link href="/#process" onClick={toggleMenu} className="text-base font-medium text-slate-800 hover:text-blue-600">
                 Our Process
               </Link>
-              <Link href="#case-studies" onClick={toggleMenu} className="text-base font-medium text-slate-800 hover:text-blue-600">
+              <Link href="/#case-studies" onClick={toggleMenu} className="text-base font-medium text-slate-800 hover:text-blue-600">
                 Case Studies
               </Link>
-              <Link href="#reviews" onClick={toggleMenu} className="text-base font-medium text-slate-800 hover:text-blue-600">
+              <Link href="/#reviews" onClick={toggleMenu} className="text-base font-medium text-slate-800 hover:text-blue-600">
                 Reviews
               </Link>
-              <Link href="#pricing" onClick={toggleMenu} className="text-base font-medium text-slate-800 hover:text-blue-600">
+              <Link href="/#pricing" onClick={toggleMenu} className="text-base font-medium text-slate-800 hover:text-blue-600">
                 Pricing
               </Link>
-              <Link href="#faqs" onClick={toggleMenu} className="text-base font-medium text-slate-800 hover:text-blue-600">
+              <Link href="/#faqs" onClick={toggleMenu} className="text-base font-medium text-slate-800 hover:text-blue-600">
                 FAQs
               </Link>
               <div className="pt-4 mt-2 border-t border-slate-100 flex flex-col">
