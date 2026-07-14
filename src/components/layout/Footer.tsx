@@ -34,10 +34,9 @@ export function Footer() {
           </div>
           <div>
             <h4 className="font-semibold text-white mb-4">Contact</h4>
-            <ul className="space-y-3">
-              <li className="text-slate-200">Phone: +91 98765 43210</li>
-              <li className="text-slate-200">Email: hello@softeklabs.com</li>
-              <li className="text-slate-200">Location: Mumbai, India</li>
+            <ul className="space-y-4">
+              <li className="text-slate-200">Raipur, Chhattisgarh, India</li>
+              <li className="text-slate-200">Email: softeklabsrpr@gmail.com</li>
             </ul>
           </div>
         </div>

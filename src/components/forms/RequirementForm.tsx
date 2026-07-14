@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Check, MessageCircle, Send } from "lucide-react";
+import { Check, Mail, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const formSchema = z.object({
@@ -81,10 +81,11 @@ export function RequirementForm() {
     }
   };
 
-  const getWhatsAppLink = () => {
+  const getEmailLink = () => {
     const services = selectedSolutions?.join(", ") || "custom software";
-    const message = `Hello Softek Labs, I am interested in the ${services} module. I would like to discuss the setup, customisation, and managed software plan.`;
-    return `https://wa.me/919876543210?text=${encodeURIComponent(message)}`;
+    const subject = encodeURIComponent(`Inquiry about ${services}`);
+    const body = encodeURIComponent(`Hello Softek Labs,\n\nI am interested in the ${services} module. I would like to discuss the setup, customisation, and managed software plan.\n\nThank you.`);
+    return `mailto:softeklabsrpr@gmail.com?subject=${subject}&body=${body}`;
   };
 
   if (isSuccess) {
@@ -97,9 +98,9 @@ export function RequirementForm() {
         <p className="text-slate-600 max-w-md mx-auto mb-8">
           Our team will review your requirements and contact you shortly.
         </p>
-        <Button variant="outline" className="border-green-600 text-green-700 hover:bg-green-50" asChild>
-          <a href={getWhatsAppLink()} target="_blank" rel="noopener noreferrer">
-            <MessageCircle className="mr-2 h-4 w-4" /> Message us on WhatsApp
+        <Button variant="outline" className="border-blue-600 text-blue-700 hover:bg-blue-50" asChild>
+          <a href={getEmailLink()}>
+            <Mail className="mr-2 h-4 w-4" /> Email Us
           </a>
         </Button>
       </div>
@@ -169,8 +170,8 @@ export function RequirementForm() {
           <div className="pt-4 border-t border-slate-200 flex flex-col sm:flex-row gap-4 items-center justify-between">
             <p className="text-sm text-slate-500 text-center sm:text-left">
               Prefer to talk immediately? <br className="sm:hidden" />
-              <a href={getWhatsAppLink()} target="_blank" rel="noopener noreferrer" className="text-green-600 font-medium hover:underline inline-flex items-center mt-1 sm:mt-0">
-                <MessageCircle className="h-4 w-4 mr-1" /> WhatsApp Us
+              <a href={getEmailLink()} className="text-blue-600 font-medium hover:underline inline-flex items-center mt-1 sm:mt-0">
+                <Mail className="h-4 w-4 mr-1" /> Email Us
               </a>
             </p>
             <Button type="submit" size="lg" disabled={isSubmitting} className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white min-w-[200px]">
