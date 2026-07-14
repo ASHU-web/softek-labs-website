@@ -22,7 +22,7 @@ export function TechIntegrations() {
               Modern Technology. Built for Long-Term Growth.
             </h2>
             <p className="text-lg text-slate-600 mb-8">
-              We connect your custom software to the tools you already use. Integration support can be developed according to the client's requirements.
+             Your software doesn&apos;t live in isolation. We seamlessly integrate with your existing tools. you already use. Integration support can be developed according to the client&apos;s requirements.
             </p>
             <div className="flex flex-wrap gap-3">
               {integrations.map((item, i) => (

@@ -110,7 +110,7 @@ export function RequirementForm() {
     <div className="bg-white p-6 md:p-10">
       <div className="max-w-3xl mx-auto">
         <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-2">Discuss Your Requirement</h2>
-        <p className="text-slate-600 mb-8">Tell us what you're looking for, and we'll get back to you with a tailored solution.</p>
+        <p className="text-slate-600 mb-8">Tell us what you&apos;re looking for, and we&apos;ll get back to you with a tailored solution.</p>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
           

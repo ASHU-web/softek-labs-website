@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 interface PricingModuleCardProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   module: any;
   isAnnual: boolean;
 }

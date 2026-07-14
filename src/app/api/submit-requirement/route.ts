@@ -62,10 +62,10 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({ success: true, message: 'Data submitted successfully' });
-  } catch (error: any) {
-    console.error('Error submitting to Google Sheets:', error);
+  } catch (error: unknown) {
+    console.error('Submission error:', error);
     return NextResponse.json(
-      { success: false, error: error.message || 'Failed to submit data' },
+      { success: false, error: (error as Error).message || 'Failed to submit data' },
       { status: 500 }
     );
   }

@@ -58,7 +58,7 @@ export function ClientReviews() {
                   ))}
                 </div>
                 <p className="text-slate-700 italic mb-8 relative z-10 flex-1 leading-relaxed text-lg">
-                  "{review.text}"
+                  &quot;{review.text}&quot;
                 </p>
                 <div className="relative z-10 border-t border-slate-100 pt-6 w-full text-center md:text-left">
                   <p className="font-bold text-slate-900 text-lg">{review.name}</p>

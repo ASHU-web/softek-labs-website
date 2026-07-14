@@ -20,7 +20,7 @@ export function FinalCta() {
           className="text-center max-w-3xl mx-auto"
         >
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-6">
-            Let's Build Software That Works the Way Your Business Works
+            Let&apos;s Build Your Systemware That Works the Way Your Business Works
           </h2>
           <p className="text-lg md:text-xl text-blue-100 mb-10 text-balance">
             Tell us how your business currently operates, where your team faces difficulties and what you want to improve. We will help you convert the process into a customised software solution.
