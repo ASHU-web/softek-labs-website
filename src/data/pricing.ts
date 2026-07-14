@@ -115,7 +115,7 @@ export const individualModules = [
     shortDescription: "A fast, mobile-responsive business website for presenting your company, products, services, projects, and contact information.",
     setupFee: "15,000",
     isStartingFrom: true,
-    monthlyPlan: "", // No monthly option for static website
+    monthlyPlan: "999", // Added monthly option for uniform pricing
     annualPlan: "9,999",
     features: [
       "Up to 7 standard pages",
