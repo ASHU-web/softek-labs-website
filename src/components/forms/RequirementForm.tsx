@@ -107,7 +107,7 @@ export function RequirementForm() {
   }
 
   return (
-    <div className="bg-white p-6 md:p-10">
+    <div className="bg-white p-4 sm:p-6 md:p-10">
       <div className="max-w-3xl mx-auto">
         <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-2">Discuss Your Requirement</h2>
         <p className="text-slate-600 mb-8">Tell us what you&apos;re looking for, and we&apos;ll get back to you with a tailored solution.</p>

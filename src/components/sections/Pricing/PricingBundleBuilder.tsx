@@ -56,7 +56,7 @@ export function PricingBundleBuilder() {
           </p>
         </div>
 
-        <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 md:p-10 mb-8">
+        <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-4 sm:p-6 md:p-10 mb-8">
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
             {individualModules.map((module) => {
               const isSelected = selectedModules.includes(module.id);
@@ -87,7 +87,7 @@ export function PricingBundleBuilder() {
             })}
           </div>
 
-          <div className="bg-slate-50 rounded-2xl p-6 md:p-8 border border-slate-100 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="bg-slate-50 rounded-2xl p-4 sm:p-6 md:p-8 border border-slate-100 flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex-1 w-full">
               {selectedModules.length > 0 ? (
                 <>
