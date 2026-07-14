@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Lead {
+  id                String   @id @default(uuid())
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  // Basic Details
+  name              String
+  company           String
+  phone             String
+  email             String
+  city              String
+  website           String?
+  
+  // Business Info
+  industry          String
+  employees         String
+  branches          Int
+  warehouses        Int
+  currentSystem     String
+  mainChallenge     String   @db.Text
+  
+  // Requirements
+  solutions         String[] // Array of selected solutions
+  
+  // Workflow
+  currentManagement String   @db.Text
+  targetTeams       String
+  expectedOutcome   String   @db.Text
+  hasMigrationData  Boolean  @default(false)
+
+  // Meta
+  status            LeadStatus @default(NEW)
+  source            String?
+  assignedTo        String?  // Admin ID
+  notes             Note[]
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  REQUIREMENT_DISCUSSION
+  PROPOSAL_PREPARATION
+  PROPOSAL_SHARED
+  FOLLOW_UP
+  CONVERTED
+  NOT_RELEVANT
+  CLOSED
+}
+
+model Note {
+  id        String   @id @default(uuid())
+  content   String   @db.Text
+  createdAt DateTime @default(now())
+  leadId    String
+  lead      Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  authorId  String   // Admin ID
+}
+
+model Admin {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      String   @default("MEMBER") // ADMIN, MEMBER
+  createdAt DateTime @default(now())
+}
