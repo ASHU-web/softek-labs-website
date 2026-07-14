@@ -9,6 +9,8 @@ import { PricingBundleBuilder } from "./Pricing/PricingBundleBuilder";
 import { PricingIncludes } from "./Pricing/PricingIncludes";
 import { PricingAdditionalCosts } from "./Pricing/PricingAdditionalCosts";
 import { PricingFAQs } from "./Pricing/PricingFAQs";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import { individualModules } from "@/data/pricing";
 
 export function Pricing() {
@@ -67,13 +69,32 @@ export function Pricing() {
           </div>
         )}
 
-        {/* Tab Content */}
         {activeTab === "individual" && (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto">
-            {individualModules.map((module) => (
-              <PricingModuleCard key={module.id} module={module} isAnnual={isAnnual} />
-            ))}
-          </div>
+          <>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto mb-12">
+              {individualModules.map((module) => (
+                <PricingModuleCard key={module.id} module={module} isAnnual={isAnnual} />
+              ))}
+            </div>
+            
+            {/* Custom Module Callout */}
+            <div className="max-w-4xl mx-auto bg-slate-900 rounded-2xl border border-slate-800 p-8 md:p-10 text-center shadow-2xl relative overflow-hidden mb-12">
+              {/* Background decoration */}
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,#334155_1px,transparent_1px),linear-gradient(to_bottom,#334155_1px,transparent_1px)] bg-[size:3rem_3rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-30" />
+              
+              <div className="relative z-10">
+                <h3 className="text-2xl font-bold text-white mb-3">Have a different kind of module requirement?</h3>
+                <p className="text-slate-300 mb-8 max-w-2xl mx-auto text-lg">
+                  Every business is unique. Tell us your exact requirements and we will find and build the best software solution for your specific operational needs.
+                </p>
+                <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white border-0" asChild>
+                  <Link href="/submit-requirement">
+                    Discuss Your Requirement
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </>
         )}
 
         {activeTab === "suite" && (
