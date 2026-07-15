@@ -76,7 +76,7 @@ export function RequirementForm() {
       setIsSuccess(true);
     } catch (error) {
       console.error('Submission error:', error);
-      alert('There was an error submitting your requirement. Please try again or use the WhatsApp option below.');
+      alert('There was an error submitting your requirement. Please try again or use the Email option below.');
       setIsSubmitting(false);
     }
   };

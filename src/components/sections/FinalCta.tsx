@@ -32,11 +32,6 @@ export function FinalCta() {
                 Discuss Your Requirement <ArrowRight className="ml-2 h-4 w-4 shrink-0" />
               </Link>
             </Button>
-            <Button size="lg" className="bg-green-600 text-white hover:bg-green-700 border-none w-full sm:w-auto text-wrap h-auto py-3" asChild>
-              <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer">
-                <MessageCircle className="mr-2 h-5 w-5 shrink-0" /> Send Requirement on WhatsApp
-              </a>
-            </Button>
           </div>
         </motion.div>
       </div>
