@@ -12,7 +12,7 @@ export const individualModules = [
     annualPlan: "49,999",
     features: [
       "Up to 5 users",
-      "1 warehouse",
+      "Up to 3 warehouses",
       "Up to 5,000 products",
       "Purchase and sales management",
       "Stock transfers and adjustments",
@@ -23,7 +23,7 @@ export const individualModules = [
       "Cloud hosting and automated backups",
       "Maintenance and technical support",
     ],
-    additionalCosts: "Additional warehouse: Starting from ₹1,500/month",
+    additionalCosts: "Additional costs: ₹1,500/month per additional warehouse, ₹1/month per additional item, and ₹300/month per additional user.",
     ctaText: "Get Inventory Software",
     formValue: "Inventory Management"
   },
@@ -38,7 +38,7 @@ export const individualModules = [
     annualPlan: "49,999",
     features: [
       "Up to 5 users",
-      "Up to 10,000 leads and customers",
+      "Up to 20,000 leads and customers",
       "Custom sales pipeline",
       "Follow-up reminders",
       "Customer activity history",
@@ -49,7 +49,7 @@ export const individualModules = [
       "Cloud hosting and automated backups",
       "Maintenance and technical support",
     ],
-    additionalCosts: "Additional user: Starting from ₹400/user/month",
+    additionalCosts: "Additional costs: ₹400/month per additional user, and ₹0.25/month per additional lead.",
     ctaText: "Get CRM Software",
     formValue: "CRM"
   },
