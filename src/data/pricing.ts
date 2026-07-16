@@ -23,7 +23,7 @@ export const individualModules = [
       "Cloud hosting and automated backups",
       "Maintenance and technical support",
     ],
-    additionalCosts: "Additional costs: ₹1,500/month per additional warehouse, ₹1/month per additional item, and ₹300/month per additional user.",
+    additionalCosts: "Additional costs:\n• ₹1,500/month per additional warehouse\n• ₹1/month per additional item\n• ₹300/month per additional user",
     ctaText: "Get Inventory Software",
     formValue: "Inventory Management"
   },
@@ -49,7 +49,7 @@ export const individualModules = [
       "Cloud hosting and automated backups",
       "Maintenance and technical support",
     ],
-    additionalCosts: "Additional costs: ₹400/month per additional user, and ₹0.25/month per additional lead.",
+    additionalCosts: "Additional costs:\n• ₹400/month per additional user\n• ₹0.25/month per additional lead",
     ctaText: "Get CRM Software",
     formValue: "CRM"
   },
@@ -77,7 +77,7 @@ export const individualModules = [
       "Cloud hosting and automated backups",
       "Maintenance and technical support",
     ],
-    additionalCosts: "Additional employees: Starting from ₹50/employee/month. Note: Hardware is charged separately.",
+    additionalCosts: "Additional costs:\n• ₹50/month per additional employee\n• Hardware is charged separately",
     ctaText: "Get Attendance Software",
     formValue: "Staff Management and Attendance"
   },

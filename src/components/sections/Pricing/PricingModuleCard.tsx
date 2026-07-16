@@ -109,7 +109,7 @@ export function PricingModuleCard({ module, isAnnual }: PricingModuleCardProps) 
         </div>
         
         {module.additionalCosts && (
-          <p className="text-xs text-slate-500 mb-6 bg-slate-50 p-3 rounded-lg border border-slate-100">
+          <p className="text-xs text-slate-500 mb-6 bg-slate-50 p-3 rounded-lg border border-slate-100 whitespace-pre-line">
             {module.additionalCosts}
           </p>
         )}
