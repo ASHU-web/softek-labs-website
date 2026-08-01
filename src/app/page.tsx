@@ -14,6 +14,7 @@ import { ClientReviews } from "@/components/sections/ClientReviews";
 import { Faqs } from "@/components/sections/Faqs";
 import { Pricing } from "@/components/sections/Pricing";
 import { FinalCta } from "@/components/sections/FinalCta";
+import { SocialMediaMarketing } from "@/components/sections/SocialMediaMarketing";
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
       <ProblemRecognition />
       <SolutionsOverview />
       <DevelopmentProcess />
+      <SocialMediaMarketing />
       <CaseStudyPreview />
       <ClientReviews />
       <Pricing />

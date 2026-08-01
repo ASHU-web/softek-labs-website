@@ -19,8 +19,14 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 const solutionsList = [
-  "Inventory Management", "CRM", "Staff Management and Attendance", 
-  "Barcode & QR", "Static Website", "Dynamic Website", "Complete Business Suite", "Completely Custom Requirement"
+  "Track Stock & Warehouses (Inventory)", 
+  "Manage Sales Team & Convert Better (CRM)", 
+  "Track Staff & Attendance", 
+  "Barcode & Product Traceability", 
+  "Custom Business Website", 
+  "The Complete Software Hub",
+  "AI Social Media & Lead Gen",
+  "Something Else (Fully Custom)"
 ];
 
 export function RequirementForm() {

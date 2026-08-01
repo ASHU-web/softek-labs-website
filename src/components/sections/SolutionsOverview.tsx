@@ -1,90 +1,120 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { PackageOpen, Target, Building2, Factory, QrCode, ArrowRightLeft, Workflow, LayoutTemplate, ArrowRight } from "lucide-react";
-import Link from "next/link";
-
-const solutions = [
-  {
-    icon: PackageOpen,
-    title: "Inventory Management",
-    description: "Manage stock, purchases, sales, transfers, adjustments, and warehouses.",
-    link: "/#pricing"
-  },
-  {
-    icon: Target,
-    title: "CRM",
-    description: "Manage leads, customers, follow-ups, sales pipelines, and tasks.",
-    link: "/#pricing"
-  },
-  {
-    icon: Building2,
-    title: "Staff & Attendance",
-    description: "Manage employee attendance, shifts, leave, locations, and face-recognition.",
-    link: "/#pricing"
-  },
-  {
-    icon: QrCode,
-    title: "Barcode & Traceability",
-    description: "Generate barcodes, track products, and provide public product verification.",
-    link: "/#pricing"
-  },
-  {
-    icon: LayoutTemplate,
-    title: "Business Websites",
-    description: "Fast, mobile-responsive static and dynamic websites with admin panels.",
-    link: "/#pricing"
-  },
-  {
-    icon: Workflow,
-    title: "Complete Business Suite",
-    description: "A connected software ecosystem for businesses to manage everything from one platform.",
-    link: "/#pricing"
-  },
-  {
-    icon: Factory,
-    title: "Enterprise Custom",
-    description: "Complex workflows, multi-company operations, mobile apps, and integrations.",
-    link: "/#pricing"
-  }
-];
+import { PackageOpen, Target, Building2, QrCode } from "lucide-react";
 
 export function SolutionsOverview() {
   return (
-    <section id="solutions" className="py-16 md:py-24 bg-slate-50">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-4">
-            Unified Core Solutions
+    <section id="solutions" className="py-24 md:py-32 bg-white relative overflow-hidden">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-600/5 rounded-full blur-[100px]" />
+      
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <div className="text-center max-w-4xl mx-auto mb-20">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 mb-6">
+            Everything connects into one custom system.
           </h2>
-          <p className="text-lg text-slate-600">
-            One connected system replacing multiple disconnected apps.
+          <p className="text-xl text-slate-600">
+            We build a central hub tailored strictly to your operations, connecting every department perfectly without unnecessary features.
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {solutions.map((solution, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="group p-6 rounded-2xl border border-slate-200 bg-white hover:border-blue-300 hover:shadow-lg transition-all"
-            >
-              <div className="h-12 w-12 rounded-lg bg-blue-50 flex items-center justify-center mb-6 text-blue-600 group-hover:scale-110 transition-transform">
-                <solution.icon className="h-6 w-6" />
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">{solution.title}</h3>
-              <p className="text-slate-600 text-sm mb-6 leading-relaxed">{solution.description}</p>
-              <Link 
-                href={solution.link}
-                className="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-700"
-              >
-                Learn More <ArrowRight className="ml-1 h-4 w-4" />
-              </Link>
-            </motion.div>
-          ))}
+        {/* Visual Order Diagram */}
+        <div className="relative max-w-5xl mx-auto h-[400px] flex items-center justify-center mt-12">
+          
+          {/* Connecting Blue Lines */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ filter: 'drop-shadow(0 0 8px rgba(37,99,235,0.3))' }}>
+            <motion.path 
+              initial={{ pathLength: 0, opacity: 0 }}
+              whileInView={{ pathLength: 1, opacity: 1 }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+              d="M 20% 50% L 50% 50%" 
+              stroke="#2563eb" strokeWidth="3" fill="none" 
+            />
+            <motion.path 
+              initial={{ pathLength: 0, opacity: 0 }}
+              whileInView={{ pathLength: 1, opacity: 1 }}
+              transition={{ duration: 1.5, ease: "easeInOut", delay: 0.2 }}
+              d="M 50% 20% L 50% 50%" 
+              stroke="#2563eb" strokeWidth="3" fill="none" 
+            />
+            <motion.path 
+              initial={{ pathLength: 0, opacity: 0 }}
+              whileInView={{ pathLength: 1, opacity: 1 }}
+              transition={{ duration: 1.5, ease: "easeInOut", delay: 0.4 }}
+              d="M 80% 50% L 50% 50%" 
+              stroke="#2563eb" strokeWidth="3" fill="none" 
+            />
+            <motion.path 
+              initial={{ pathLength: 0, opacity: 0 }}
+              whileInView={{ pathLength: 1, opacity: 1 }}
+              transition={{ duration: 1.5, ease: "easeInOut", delay: 0.6 }}
+              d="M 50% 80% L 50% 50%" 
+              stroke="#2563eb" strokeWidth="3" fill="none" 
+            />
+          </svg>
+
+          {/* Central Hub */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ type: "spring", bounce: 0.5, delay: 0.8 }}
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
+          >
+            <div className="h-32 w-32 rounded-3xl bg-gradient-to-br from-blue-600 to-purple-600 shadow-[0_0_40px_rgba(37,99,235,0.4)] flex flex-col items-center justify-center text-white relative border-4 border-white">
+              <span className="text-xl font-black tracking-wider">SOFTEK</span>
+              <span className="text-xs font-medium tracking-widest opacity-80">LABS</span>
+            </div>
+          </motion.div>
+
+          {/* Connected Nodes */}
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ type: "spring", bounce: 0.5 }}
+            className="absolute left-[10%] top-1/2 -translate-y-1/2 flex flex-col items-center gap-3 z-10"
+          >
+            <div className="h-16 w-16 rounded-2xl bg-white border border-slate-200 shadow-xl flex items-center justify-center text-blue-600">
+              <PackageOpen className="h-8 w-8" />
+            </div>
+            <span className="text-sm font-bold text-slate-800">Inventory</span>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: -50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ type: "spring", bounce: 0.5, delay: 0.2 }}
+            className="absolute left-1/2 -translate-x-1/2 top-[10%] flex flex-col items-center gap-3 z-10"
+          >
+            <div className="h-16 w-16 rounded-2xl bg-white border border-slate-200 shadow-xl flex items-center justify-center text-blue-600">
+              <Target className="h-8 w-8" />
+            </div>
+            <span className="text-sm font-bold text-slate-800">CRM</span>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ type: "spring", bounce: 0.5, delay: 0.4 }}
+            className="absolute right-[10%] top-1/2 -translate-y-1/2 flex flex-col items-center gap-3 z-10"
+          >
+            <div className="h-16 w-16 rounded-2xl bg-white border border-slate-200 shadow-xl flex items-center justify-center text-blue-600">
+              <Building2 className="h-8 w-8" />
+            </div>
+            <span className="text-sm font-bold text-slate-800">Staff & Payroll</span>
+          </motion.div>
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ type: "spring", bounce: 0.5, delay: 0.6 }}
+            className="absolute left-1/2 -translate-x-1/2 bottom-[10%] flex flex-col items-center gap-3 z-10"
+          >
+            <div className="h-16 w-16 rounded-2xl bg-white border border-slate-200 shadow-xl flex items-center justify-center text-blue-600">
+              <QrCode className="h-8 w-8" />
+            </div>
+            <span className="text-sm font-bold text-slate-800">Traceability</span>
+          </motion.div>
+
         </div>
       </div>
     </section>

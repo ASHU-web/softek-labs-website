@@ -20,16 +20,19 @@ export function Navbar() {
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex gap-6">
-          <Link href="/#solutions" className="text-sm font-medium hover:text-blue-600 transition-colors">
+          <Link href="#solutions" className="text-sm font-medium hover:text-blue-600 transition-colors">
             Solutions
           </Link>
-          <Link href="/#process" className="text-sm font-medium hover:text-blue-600 transition-colors">
+          <Link href="#process" className="text-sm font-medium hover:text-blue-600 transition-colors">
             Our Process
           </Link>
-          <Link href="/#case-studies" className="text-sm font-medium hover:text-blue-600 transition-colors">
+          <Link href="#marketing" className="text-sm font-medium hover:text-blue-600 transition-colors">
+            AI Marketing
+          </Link>
+          <Link href="#case-studies" className="text-sm font-medium hover:text-blue-600 transition-colors">
             Case Studies
           </Link>
-          <Link href="/#reviews" className="text-sm font-medium hover:text-blue-600 transition-colors">
+          <Link href="#reviews" className="text-sm font-medium hover:text-blue-600 transition-colors">
             Reviews
           </Link>
           <Link href="/#pricing" className="text-sm font-medium hover:text-blue-600 transition-colors">

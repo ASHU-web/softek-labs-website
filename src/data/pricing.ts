@@ -1,4 +1,4 @@
-import { Box, Users, Search, ScanLine, LayoutTemplate, Globe, Server, Cloud, Code2, Database, LifeBuoy, Zap } from "lucide-react";
+import { Box, Users, Search, ScanLine, LayoutTemplate, Globe, Server, Cloud, Code2, Database, LifeBuoy, Zap, Target } from "lucide-react";
 
 export const individualModules = [
   {
@@ -158,6 +158,31 @@ export const individualModules = [
     additionalCosts: "",
     ctaText: "Get Dynamic Website",
     formValue: "Dynamic Website"
+  },
+  {
+    id: "ai_marketing",
+    name: "AI Social Media Marketing",
+    icon: Target,
+    shortDescription: "An independent monthly service where we deploy AI to generate creatives and run targeted ads to scale your business.",
+    setupFee: "0",
+    isStartingFrom: false,
+    monthlyPlan: "Custom",
+    annualPlan: "Custom",
+    features: [
+      "AI-driven creative generation",
+      "Copywriting & script generation",
+      "Ad campaign management",
+      "Targeted LinkedIn & Meta Ads",
+      "Inorganic & paid distribution",
+      "Service cost & ad spend included",
+    ],
+    expandableFeatures: [
+      "Weekly analytics reports",
+      "Real-time ROI optimization",
+    ],
+    additionalCosts: "Pricing scales based on the volume of leads and scale of ad spend required.",
+    ctaText: "Get a Marketing Quote",
+    formValue: "AI Marketing"
   }
 ];
 
