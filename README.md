@@ -1,36 +1,21 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Softek Labs
 
-## Getting Started
+A responsive Next.js website for online marketing, WhatsApp campaigns, digital content, custom software, and websites.
 
-First, run the development server:
+## Development
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Use Node.js 20.9+ and run `npm ci`, then `npm run dev`. Run `npm run build` for the production build. With the local server running, `node scripts/check-enquiry.mjs` exercises nine invalid-request cases without writing any leads.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Enquiries
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Copy `.env.example` to `.env.local` and configure the existing Google service account and spreadsheet. Share the sheet with the service account email. The first worksheet must be named `Sheet1`; the existing A:O column layout is preserved. The API validates input, bounds payload size, checks same-origin browser submissions, and writes literal values using RAW. A hidden honeypot rejects basic form bots. It does not provide distributed rate limiting; configure hosting-level request limits if needed.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The UI only reports success after Sheets confirms the write. Missing configuration returns 503 with an email fallback. Do not commit credentials. Production and preview environments need their own configuration as appropriate.
 
-## Learn More
+## Content
 
-To learn more about Next.js, take a look at the following resources:
+Service copy is in `src/data/services.ts`. Shared layout is in `src/components/layout`; studio components are in `src/components/studio`. The original case-study URL is preserved. Visual dashboard and campaign artwork are explicitly illustrative; no campaign performance figures are fabricated.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The existing GitHub-connected Vercel project can deploy this Next.js application. Set `NEXT_PUBLIC_SITE_URL` when changing the canonical domain. Review the supplied privacy and website terms against actual business practices before launch.

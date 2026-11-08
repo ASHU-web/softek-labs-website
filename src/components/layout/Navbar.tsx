@@ -1,102 +1,80 @@
 "use client";
-
 import { useState } from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
-
+import Image from "next/image";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 export function Navbar() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const toggleMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
-
+  const [open, setOpen] = useState(false);
+  const close = () => setOpen(false);
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/80 backdrop-blur-md">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
-        <Link href="/" className="flex items-center gap-2">
-          <img src="/images/softek-logo.png" alt="Softek Labs Logo" className="h-10 md:h-12 w-auto" />
-        </Link>
-        
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex gap-6">
-          <Link href="#solutions" className="text-sm font-medium hover:text-blue-600 transition-colors">
-            Solutions
-          </Link>
-          <Link href="#process" className="text-sm font-medium hover:text-blue-600 transition-colors">
-            Our Process
-          </Link>
-          <Link href="#marketing" className="text-sm font-medium hover:text-blue-600 transition-colors">
-            AI Marketing
-          </Link>
-          <Link href="#case-studies" className="text-sm font-medium hover:text-blue-600 transition-colors">
-            Case Studies
-          </Link>
-          <Link href="#reviews" className="text-sm font-medium hover:text-blue-600 transition-colors">
-            Reviews
-          </Link>
-          <Link href="/#pricing" className="text-sm font-medium hover:text-blue-600 transition-colors">
-            Pricing
-          </Link>
-          <Link href="/#faqs" className="text-sm font-medium hover:text-blue-600 transition-colors">
-            FAQs
-          </Link>
-        </nav>
-        
-        <div className="hidden md:flex items-center gap-4">
-          <Button asChild>
-            <Link href="/submit-requirement">Discuss Your Requirement</Link>
-          </Button>
-        </div>
-
-        {/* Mobile Hamburger Icon */}
-        <button 
-          className="md:hidden p-2 text-slate-600 hover:text-slate-900 focus:outline-none" 
-          onClick={toggleMenu}
-          aria-label="Toggle Menu"
+    <header className="site-header">
+      <div className="shell nav-inner">
+        <Link
+          className="wordmark"
+          href="/"
+          aria-label="Softek Labs home"
+          onClick={close}
         >
-          {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          <Image
+            src="/images/softek-brand-logo.png"
+            alt="Softek Labs"
+            width={1024}
+            height={174}
+            className="brand-logo"
+            priority
+            sizes="(max-width: 600px) 175px, 230px"
+          />
+        </Link>
+        <nav className="desktop-nav" aria-label="Main navigation">
+          <Link href="/#services">What we do</Link>
+          <Link href="/#approach">How we work</Link>
+          <Link href="/#work">Our work</Link>
+          <Link href="/#faqs">FAQs</Link>
+        </nav>
+        <Link className="button button-dark nav-cta" href="/submit-requirement">
+          Let’s talk <ArrowUpRight size={17} />
+        </Link>
+        <button
+          className="menu-toggle"
+          type="button"
+          aria-expanded={open}
+          aria-controls="mobile-nav"
+          aria-label={open ? "Close menu" : "Open menu"}
+          onClick={() => setOpen(!open)}
+        >
+          {open ? <X /> : <Menu />}
         </button>
       </div>
-
-      {/* Mobile Navigation Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden border-t border-slate-100 bg-white overflow-hidden"
+      {open && (
+        <nav
+          id="mobile-nav"
+          className="mobile-nav shell"
+          aria-label="Mobile navigation"
+          onKeyDown={(e) => {
+            if (e.key === "Escape") close();
+          }}
+        >
+          <Link onClick={close} href="/#services">
+            What we do
+          </Link>
+          <Link onClick={close} href="/#approach">
+            How we work
+          </Link>
+          <Link onClick={close} href="/#work">
+            Our work
+          </Link>
+          <Link onClick={close} href="/#faqs">
+            FAQs
+          </Link>
+          <Link
+            className="button button-blue"
+            onClick={close}
+            href="/submit-requirement"
           >
-            <nav className="flex flex-col px-4 py-6 gap-4">
-              <Link href="/#solutions" onClick={toggleMenu} className="text-base font-medium text-slate-800 hover:text-blue-600">
-                Solutions
-              </Link>
-              <Link href="/#process" onClick={toggleMenu} className="text-base font-medium text-slate-800 hover:text-blue-600">
-                Our Process
-              </Link>
-              <Link href="/#case-studies" onClick={toggleMenu} className="text-base font-medium text-slate-800 hover:text-blue-600">
-                Case Studies
-              </Link>
-              <Link href="/#reviews" onClick={toggleMenu} className="text-base font-medium text-slate-800 hover:text-blue-600">
-                Reviews
-              </Link>
-              <Link href="/#pricing" onClick={toggleMenu} className="text-base font-medium text-slate-800 hover:text-blue-600">
-                Pricing
-              </Link>
-              <Link href="/#faqs" onClick={toggleMenu} className="text-base font-medium text-slate-800 hover:text-blue-600">
-                FAQs
-              </Link>
-              <div className="pt-4 mt-2 border-t border-slate-100 flex flex-col">
-                <Button className="w-full" asChild onClick={toggleMenu}>
-                  <Link href="/submit-requirement">Discuss Your Requirement</Link>
-                </Button>
-              </div>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            Let’s talk <ArrowUpRight size={18} />
+          </Link>
+        </nav>
+      )}
     </header>
   );
 }
