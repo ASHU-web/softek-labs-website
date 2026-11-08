@@ -1,27 +1,54 @@
 import { RequirementForm } from "@/components/forms/RequirementForm";
-
+import { email } from "@/data/services";
+import { ArrowUpRight } from "lucide-react";
 export const metadata = {
-  title: "Submit Your Requirement | Softek Labs",
-  description: "Tell us about your business operations and what you want to improve. We'll help you build the right custom software solution."
+  title: "Let’s talk about your next move",
+  description:
+    "Tell Softek Labs about your marketing, WhatsApp campaigns, creative content, website, or custom software project.",
+  alternates: { canonical: "/submit-requirement" },
 };
-
-export default function SubmitRequirementPage() {
+export default async function SubmitRequirementPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ service?: string | string[] }>;
+}) {
+  const query = await searchParams;
+  const service = typeof query.service === "string" ? query.service : undefined;
   return (
-    <div className="bg-slate-50 min-h-screen py-12 md:py-24">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="max-w-3xl mx-auto mb-12 text-center">
-          <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-4">
-            Discuss Your Requirement
+    <section className="contact-section">
+      <div className="shell contact-grid">
+        <div className="contact-copy">
+          <span className="eyebrow">
+            <span className="status-dot" /> START SOMETHING GOOD
+          </span>
+          <h1>
+            Your next chapter
+            <br />
+            starts here<span style={{ color: "var(--blue)" }}>.</span>
           </h1>
-          <p className="text-lg text-slate-600">
-            Provide details about your business workflow and challenges. Our business analysts will review your requirements and get back to you with a tailored approach.
+          <p>
+            A new campaign. A better website. Software that just fits. Tell us
+            what’s on your mind, and let’s find the right way forward.
           </p>
+          <a className="email-link" href={`mailto:${email}`}>
+            {email}
+            <ArrowUpRight size={17} />
+          </a>
+          <div className="contact-aside">
+            <h2>What happens next?</h2>
+            <p>
+              <span>01</span>We review your goals and requirements.
+            </p>
+            <p>
+              <span>02</span>We connect to understand the details.
+            </p>
+            <p>
+              <span>03</span>You get a clear approach and a tailored quote.
+            </p>
+          </div>
         </div>
-        
-        <div className="max-w-4xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-xl overflow-hidden">
-          <RequirementForm />
-        </div>
+        <RequirementForm key={service || "general"} initialService={service} />
       </div>
-    </div>
+    </section>
   );
 }

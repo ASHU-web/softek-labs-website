@@ -1,193 +1,216 @@
 "use client";
-
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { Check, Mail, Send } from "lucide-react";
-import { Button } from "@/components/ui/button";
-
-const formSchema = z.object({
-  name: z.string().min(2, "Name is required"),
-  company: z.string().min(2, "Business name is required"),
-  phone: z.string().min(10, "Valid phone number is required"),
-  email: z.string().optional().or(z.literal("")),
-  requirements: z.string().optional(),
-  solutions: z.array(z.string()).min(1, "Select at least one service"),
-});
-
-type FormData = z.infer<typeof formSchema>;
-
-const solutionsList = [
-  "Track Stock & Warehouses (Inventory)", 
-  "Manage Sales Team & Convert Better (CRM)", 
-  "Track Staff & Attendance", 
-  "Barcode & Product Traceability", 
-  "Custom Business Website", 
-  "The Complete Software Hub",
-  "AI Social Media & Lead Gen",
-  "Something Else (Fully Custom)"
-];
-
-export function RequirementForm() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-
-  const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm<FormData>({
-    resolver: zodResolver(formSchema),
-    defaultValues: { solutions: [] }
+import Link from "next/link";
+import { ArrowUpRight, Check } from "lucide-react";
+import { enquirySchema, serviceOptions, type EnquiryData } from "@/lib/enquiry";
+import { email } from "@/data/services";
+export function RequirementForm({
+  initialService,
+}: {
+  initialService?: string;
+}) {
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<EnquiryData>({
+    resolver: zodResolver(enquirySchema),
+    defaultValues: {
+      solutions: serviceOptions.some((s) => s.value === initialService)
+        ? [initialService!]
+        : [],
+      name: "",
+      company: "",
+      phone: "",
+      email: "",
+      requirements: "",
+      website: "",
+    },
   });
-
-  const selectedSolutions = watch("solutions");
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const urlParams = new URLSearchParams(window.location.search);
-      const serviceQuery = urlParams.get('service');
-      if (serviceQuery) {
-        const services = serviceQuery.split(',').map(s => s.trim());
-        setValue("solutions", services, { shouldValidate: true });
-      }
-    }
-  }, [setValue]);
-
-  const toggleSolution = (solution: string) => {
-    const current = selectedSolutions || [];
-    if (current.includes(solution)) {
-      setValue("solutions", current.filter(s => s !== solution), { shouldValidate: true });
-    } else {
-      setValue("solutions", [...current, solution], { shouldValidate: true });
-    }
-  };
-
-  const onSubmit = async (data: FormData) => {
-    setIsSubmitting(true);
-    
+  async function submit(data: EnquiryData) {
+    setError("");
     try {
-      const response = await fetch('/api/submit-requirement', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      const response = await fetch("/api/submit-requirement", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
+        signal: AbortSignal.timeout(25000),
       });
-      
-      const result = await response.json();
-      
       if (!response.ok) {
-        throw new Error(result.error || 'Failed to submit form');
+        const result = await response.json().catch(() => null);
+        throw new Error(
+          result?.error || "We couldn’t send your enquiry. Please try again.",
+        );
       }
-      
-      setIsSubmitting(false);
-      setIsSuccess(true);
-    } catch (error) {
-      console.error('Submission error:', error);
-      alert('There was an error submitting your requirement. Please try again or use the Email option below.');
-      setIsSubmitting(false);
+      setSuccess(true);
+    } catch (e) {
+      setError(
+        e instanceof Error && e.name !== "TimeoutError"
+          ? e.message
+          : "The request took too long. Please try again or email us directly.",
+      );
     }
-  };
-
-  const getEmailLink = () => {
-    const services = selectedSolutions?.join(", ") || "custom software";
-    const subject = encodeURIComponent(`Inquiry about ${services}`);
-    const body = encodeURIComponent(`Hello Softek Labs,\n\nI am interested in the ${services} module. I would like to discuss the setup, customisation, and managed software plan.\n\nThank you.`);
-    return `mailto:softeklabsrpr@gmail.com?subject=${subject}&body=${body}`;
-  };
-
-  if (isSuccess) {
+  }
+  if (success)
     return (
-      <div className="p-12 text-center flex flex-col items-center justify-center min-h-[400px]">
-        <div className="h-20 w-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
-          <Check className="h-10 w-10 text-green-600" />
+      <div
+        className="form-success"
+        role="status"
+        tabIndex={-1}
+        ref={(el) => {
+          el?.focus();
+        }}
+      >
+        <div className="success-icon">
+          <Check size={28} />
         </div>
-        <h3 className="text-2xl font-bold text-slate-900 mb-2">Thank you!</h3>
-        <p className="text-slate-600 max-w-md mx-auto mb-8">
-          Our team will review your requirements and contact you shortly.
+        <h2>You’re on our radar.</h2>
+        <p>
+          Thanks for telling us about your business. We’ll review your enquiry
+          and get in touch to discuss the next step.
         </p>
-        <Button variant="outline" className="border-blue-600 text-blue-700 hover:bg-blue-50" asChild>
-          <a href={getEmailLink()}>
-            <Mail className="mr-2 h-4 w-4" /> Email Us
-          </a>
-        </Button>
+        <Link className="button button-dark" href="/">
+          Back to Softek Labs <ArrowUpRight size={18} />
+        </Link>
       </div>
     );
-  }
-
   return (
-    <div className="bg-white p-4 sm:p-6 md:p-10">
-      <div className="max-w-3xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-2">Discuss Your Requirement</h2>
-        <p className="text-slate-600 mb-8">Tell us what you&apos;re looking for, and we&apos;ll get back to you with a tailored solution.</p>
-
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-          
-          {/* Services Section */}
-          <div>
-            <label className="text-sm font-semibold text-slate-900 mb-3 block">What solutions are you interested in? *</label>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {solutionsList.map(sol => {
-                const isSelected = selectedSolutions?.includes(sol);
-                return (
-                  <div 
-                    key={sol}
-                    onClick={() => toggleSolution(sol)}
-                    className={`cursor-pointer border rounded-lg p-3 text-sm font-medium transition-all flex items-center gap-3 ${isSelected ? 'border-blue-500 bg-blue-50 text-blue-900' : 'border-slate-200 bg-white hover:border-slate-300 text-slate-700'}`}
-                  >
-                    <div className={`h-5 w-5 rounded border flex items-center justify-center shrink-0 ${isSelected ? 'bg-blue-500 border-blue-500' : 'border-slate-300'}`}>
-                      {isSelected && <Check className="h-3 w-3 text-white" />}
-                    </div>
-                    {sol}
-                  </div>
-                )
-              })}
-            </div>
-            {errors.solutions && <span className="text-xs text-red-500 mt-2 block">{errors.solutions.message}</span>}
+    <form className="enquiry-form" onSubmit={handleSubmit(submit)} noValidate>
+      <fieldset>
+        <legend>What can we help you with?</legend>
+        <p className="form-hint">Choose as many as you need.</p>
+        <div className="service-choices">
+          {serviceOptions.map((s) => (
+            <label className="service-choice" key={s.value}>
+              <input
+                type="checkbox"
+                value={s.value}
+                {...register("solutions")}
+                aria-invalid={!!errors.solutions}
+                aria-describedby={
+                  errors.solutions ? "solutions-error" : undefined
+                }
+              />
+              <span>{s.label}</span>
+            </label>
+          ))}
+        </div>
+        {errors.solutions && (
+          <span className="field-error" id="solutions-error" role="alert">
+            {errors.solutions.message}
+          </span>
+        )}
+      </fieldset>
+      <div className="form-fields">
+        {(
+          [
+            {
+              key: "name",
+              label: "Your name",
+              placeholder: "Full name",
+              type: "text",
+              auto: "name",
+            },
+            {
+              key: "company",
+              label: "Business name",
+              placeholder: "Your business",
+              type: "text",
+              auto: "organization",
+            },
+            {
+              key: "phone",
+              label: "Phone number",
+              placeholder: "+91",
+              type: "tel",
+              auto: "tel",
+            },
+            {
+              key: "email",
+              label: "Email (optional)",
+              placeholder: "you@business.com",
+              type: "email",
+              auto: "email",
+            },
+          ] as const
+        ).map((f) => (
+          <div className="form-field" key={f.key}>
+            <label htmlFor={f.key}>
+              {f.label}
+              {f.key !== "email" ? " *" : ""}
+            </label>
+            <input
+              id={f.key}
+              type={f.type}
+              autoComplete={f.auto}
+              placeholder={f.placeholder}
+              {...register(f.key)}
+              required={f.key !== "email"}
+              aria-invalid={!!errors[f.key]}
+              aria-describedby={errors[f.key] ? `${f.key}-error` : undefined}
+            />
+            {errors[f.key] && (
+              <span className="field-error" id={`${f.key}-error`} role="alert">
+                {errors[f.key]?.message}
+              </span>
+            )}
           </div>
-
-          {/* Details Section */}
-          <div className="grid sm:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-slate-700">Full Name *</label>
-              <input {...register("name")} className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all" placeholder="John Doe" />
-              {errors.name && <span className="text-xs text-red-500">{errors.name.message}</span>}
-            </div>
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-slate-700">Business Name *</label>
-              <input {...register("company")} className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all" placeholder="Your Company Ltd." />
-              {errors.company && <span className="text-xs text-red-500">{errors.company.message}</span>}
-            </div>
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-slate-700">Phone Number *</label>
-              <input {...register("phone")} className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all" placeholder="+91 98765 43210" />
-              {errors.phone && <span className="text-xs text-red-500">{errors.phone.message}</span>}
-            </div>
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-slate-700">Email Address (Optional)</label>
-              <input type="email" {...register("email")} className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all" placeholder="john@example.com" />
-              {errors.email && <span className="text-xs text-red-500">{errors.email.message}</span>}
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-700">Message / Brief Requirement (Optional)</label>
-            <textarea {...register("requirements")} rows={4} className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all resize-none" placeholder="What are the main workflows you want to digitalise?" />
-          </div>
-
-          <div className="pt-4 border-t border-slate-200 flex flex-col sm:flex-row gap-4 items-center justify-between">
-            <p className="text-sm text-slate-500 text-center sm:text-left">
-              Prefer to talk immediately? <br className="sm:hidden" />
-              <a href={getEmailLink()} className="text-blue-600 font-medium hover:underline inline-flex items-center mt-1 sm:mt-0">
-                <Mail className="h-4 w-4 mr-1" /> Email Us
-              </a>
-            </p>
-            <Button type="submit" size="lg" disabled={isSubmitting} className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white min-w-[200px]">
-              {isSubmitting ? "Submitting..." : (
-                <>Send Requirement <Send className="ml-2 h-4 w-4" /></>
-              )}
-            </Button>
-          </div>
-        </form>
+        ))}
+        <div className="form-field field-full">
+          <label htmlFor="requirements">
+            A little about your idea (optional)
+          </label>
+          <textarea
+            id="requirements"
+            rows={4}
+            maxLength={3000}
+            placeholder="What would you like to create, grow, or improve?"
+            {...register("requirements")}
+            aria-invalid={!!errors.requirements}
+            aria-describedby={
+              errors.requirements ? "requirements-error" : undefined
+            }
+          />
+          {errors.requirements && (
+            <span className="field-error" id="requirements-error">
+              {errors.requirements.message}
+            </span>
+          )}
+        </div>
       </div>
-    </div>
+      <div className="honeypot" aria-hidden="true">
+        <label htmlFor="website">Leave this field empty</label>
+        <input
+          id="website"
+          tabIndex={-1}
+          autoComplete="off"
+          {...register("website")}
+        />
+      </div>
+      {error && (
+        <div className="form-alert" role="alert">
+          {error} <a href={`mailto:${email}`}>Email us directly</a>.
+        </div>
+      )}
+      <div className="form-footer">
+        <p>
+          We’ll use these details to respond to your enquiry. Read our{" "}
+          <Link href="/privacy-policy">privacy notice</Link>. Sending an enquiry
+          does not commit you to a project.
+        </p>
+        <button
+          type="submit"
+          className="button button-blue"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "Sending your enquiry…" : "Let’s get started"}
+          <ArrowUpRight size={19} />
+        </button>
+      </div>
+    </form>
   );
 }
